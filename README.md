@@ -98,6 +98,3 @@ Create a separate module ```controller.py``` under package ```uuv_mission```. Th
 ## Integration
 
 The way the controller connects with ```ClosedLoop``` should be communicated before hand. e.g., if a function is used to apply the controller, the system engineer needs to know the name of the function and the name of the module that contains the function.
-
-
-THIS IS A PR TEST
