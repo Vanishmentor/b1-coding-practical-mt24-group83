@@ -8,7 +8,7 @@ Sania Mirza chri7089@ox.ac.uk
 
 Yi Lu spet6182@ox.ac.uk
 
-# Quick IDE Setup Documentation (Windows)
+# Quick IDE Setup Documentation (Windows&MacOS)
 
 0. VSCode & Python Installation
 
@@ -23,7 +23,21 @@ Open Vscode and clone the repo from github. After the project is opened, ```ctrl
 
 Then select create virtual environment -> venv -> select a global python -> type ```.venv\replaceWithVEName``` -> install packages -> click ```requirement.txt``` -> confirm
 
-VSCode will automatically activate the virtual environment. To do this manually, go to ```.venv\replaceWithVEName\Scripts```. Double click ```activate.bat```, ```deactivate.bat``` to activate or deactivate.
+VSCode will automatically activate the virtual environment. 
+
+To do this manually on **Windows**, go to ```.venv\replaceWithVEName\Scripts```. Double click ```activate.bat```, ```deactivate.bat``` to activate or deactivate.
+
+To do this manually on **MacOS**, to activate, execute this in the terminal. **It cannot run it directly by double clicking.** Replace the directory with the correct one pointing to the ```bin/activate``` file. 
+
+```bash
+source .venv/replaceWithVEName/bin/activate
+```
+
+```bin/activate``` creates a function to deactivate. Just run this in the terminal to deactivate:
+
+```bash
+deactivate
+```
 
 * ```replaceWithVEName``` is a placeholder used to represents the custom name choosed to identify the virtual environment.
 
@@ -32,9 +46,9 @@ VSCode will automatically activate the virtual environment. To do this manually,
 
 ```ctrl+shift+p``` and type ```>Python:Select Package Manager``` -> pip
 
-Ctrl+`, or create new terminal (powershell), make sure the prompt says (replaceWithVEName), indicating the virtual environment is activated, run:
+Ctrl+`, or create new terminal, make sure the prompt says (replaceWithVEName), indicating the virtual environment is activated, run:
 
-```powershell
+```
 pip install ipykernel
 ```
 
