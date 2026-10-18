@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from .terrain import generate_reference_and_limits
 
+from pandas import read_csv
+
 class Submarine:
     def __init__(self):
 
@@ -75,8 +77,15 @@ class Mission:
 
     @classmethod
     def from_csv(cls, file_name: str):
-        # You are required to implement this method
-        pass
+
+        csv_Cache = read_csv(file_name) # reads .csv and store it
+
+        # Extract the columns from the DataFrame and convert them to numpy arrays
+        reference = csv_Cache['reference'].to_numpy()
+        cave_height = csv_Cache['cave_height'].to_numpy()
+        cave_depth = csv_Cache['cave_depth'].to_numpy()
+        
+        return cls(reference, cave_height, cave_depth)
 
 
 class ClosedLoop:
@@ -93,11 +102,15 @@ class ClosedLoop:
         positions = np.zeros((T, 2))
         actions = np.zeros(T)
         self.plant.reset_state()
+        self.controller.reset()  # Reset the controller's previous error at the start of each simulation
 
         for t in range(T):
             positions[t] = self.plant.get_position()
             observation_t = self.plant.get_depth()
-            # Call your controller here
+
+            # Call the controller with reference and observation
+            actions[t] = self.controller(mission.reference[t], observation_t)
+
             self.plant.transition(actions[t], disturbances[t])
 
         return Trajectory(positions)
