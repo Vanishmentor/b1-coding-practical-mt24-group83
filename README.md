@@ -53,11 +53,11 @@ pip install ipykernel
 ```
 
 
-3. Add ```uuv_mission``` package so the Jupyter note book can import it
+3. Configure python path
 
 Go to ```.venv\replaceWithVEName\Lib\site-packages```
 
-Create a file with subfix .pth. e.g., zzz_custom.pth. Add a line of the absolute directory path of folder ```uuv_mission```. Save.
+Create a file with subfix .pth. e.g., zzz_custom.pth. Add a line of the absolute directory path of root directory of the local repository. Save.
 
 
 4. Add a line ```.venv/``` in file  ```.gitignore``` so the virtual environment does not pollute GitHub repo.
