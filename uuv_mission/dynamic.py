@@ -3,7 +3,8 @@ from dataclasses import dataclass
 import numpy as np
 import matplotlib.pyplot as plt
 from .terrain import generate_reference_and_limits
-import pandas as pd
+
+from pandas import read_csv
 
 class Submarine:
     def __init__(self):
@@ -77,7 +78,7 @@ class Mission:
     @classmethod
     def from_csv(cls, file_name: str):
 
-        csv_Cache = pd.read_csv(file_name) # reads .csv and store it
+        csv_Cache = read_csv(file_name) # reads .csv and store it
 
         # Extract the columns from the DataFrame and convert them to numpy arrays
         reference = csv_Cache['reference'].to_numpy()
