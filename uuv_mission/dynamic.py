@@ -3,7 +3,6 @@ from dataclasses import dataclass
 import numpy as np
 import matplotlib.pyplot as plt
 from .terrain import generate_reference_and_limits
-from .control import PDcontroller
 
 class Submarine:
     def __init__(self):
@@ -81,7 +80,7 @@ class Mission:
 
 
 class ClosedLoop:
-    def __init__(self, plant: Submarine, controller: PDcontroller): # use PDcontroller class from control.py as controller
+    def __init__(self, plant: Submarine, controller):
         self.plant = plant
         self.controller = controller
 
@@ -94,12 +93,14 @@ class ClosedLoop:
         positions = np.zeros((T, 2))
         actions = np.zeros(T)
         self.plant.reset_state()
+        self.controller.reset()  # Reset the controller's previous error at the start of each simulation
 
         for t in range(T):
             positions[t] = self.plant.get_position()
             observation_t = self.plant.get_depth()
 
-            actions[t] = self.controller.__call__(mission.reference[t], observation_t) # Call the controller with reference and observation
+            # Call the controller with reference and observation
+            actions[t] = self.controller(mission.reference[t], observation_t)
 
             self.plant.transition(actions[t], disturbances[t])
 
